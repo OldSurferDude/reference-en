@@ -16,7 +16,7 @@ subCategories: [ "Control Structure" ]
 --
 [float]
 === Description
-The `if` statement checks for a condition and executes the proceeding statement or set of statements if the condition is 'true'.
+The `if` statement checks for a condition and executes the following statement (see definition of statement below) if the condition is 'true'. If `else` follows the statemnt, the statement following the `else` is executed. if the condition is false.  A statement is (1) one command, or (2) a collection of 0 or more commands enclosed with braces (curly brackets {}).
 [%hardbreaks]
 
 [float]
@@ -24,9 +24,10 @@ The `if` statement checks for a condition and executes the proceeding statement 
 [source,arduino]
 ----
 if (condition)
-{
-  //statement(s)
-}
+  //statement to be executed if condition is true 
+[else 
+  //statement to be executed if condition is false
+]
 ----
 
 [float]
@@ -36,7 +37,8 @@ condition: a boolean expression i.e., can be `true` or `false`
 [float]
 === Example Code
 
-The brackets may be omitted after an if statement. If this is done, the next line (defined by the semicolon) becomes the only conditional statement.
+Definition of statement:   
+
 [%hardbreaks]
 
 [source,arduino]
@@ -51,7 +53,53 @@ if (x > 120){ digitalWrite(LEDpin, HIGH); }
 if (x > 120){
   digitalWrite(LEDpin1, HIGH);
   digitalWrite(LEDpin2, HIGH);
-}                                 // all are correct
+}                                 
+
+if (x > 120) digital
+  digitalWrite(LEDpin1, HIGH);
+else
+  digitalWrite(LEDpin2, HIGH);
+
+if (x > 120) digital {
+  digitalWrite(LEDpin1, HIGH);
+}
+else
+  digitalWrite(LEDpin2, HIGH);
+
+                   // all are correct
+
+Note that 
+
+if (x > 120) digital {
+  digitalWrite(LEDpin1, HIGH);
+  digitalWrite(LEDpin2, HIGH);
+}
+else {
+  digitalWrite(LEDpin3, HIGH);
+  digitalWrite(LEDpin4, HIGH);
+}
+
+is not the same as
+
+if (x > 120) digital {
+  digitalWrite(LEDpin1, HIGH);
+  digitalWrite(LEDpin2, HIGH);
+}
+else 
+  digitalWrite(LEDpin3, HIGH);
+  digitalWrite(LEDpin4, HIGH);  // this command would always be executed
+
+and that
+
+if (x > 120) digital 
+  digitalWrite(LEDpin1, HIGH);
+  digitalWrite(LEDpin2, HIGH);
+else {
+  digitalWrite(LEDpin3, HIGH);
+  digitalWrite(LEDpin4, HIGH);
+}
+
+will get a compiler error because there is more than one statement between the `else` and the `if`
 ----
 [%hardbreaks]
 
